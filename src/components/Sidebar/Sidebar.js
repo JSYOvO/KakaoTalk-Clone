@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import { PermIdentity, ChatBubbleOutline, MoreHoriz, Notifications, Brightness7 } from '@material-ui/icons';
+import { Person, ChatBubble, MoreHoriz, Notifications, Brightness7 } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 const tag = '[Sidebar]';
@@ -11,12 +11,12 @@ function Sidebar() {
             <div className="sidebar_compUpper">
                 <Link to="/friends">
                     <IconButton>
-                        <PermIdentity className="sidebar__icon"/>
+                        <Person className="sidebar__icon"/>
                     </IconButton>
                 </Link>
                 <Link to="/chats">
                     <IconButton>
-                        <ChatBubbleOutline className="sidebar__icon"/>
+                        <ChatBubble className="sidebar__icon"/>
                     </IconButton>                    
                 </Link>
                 <Link to="/options">

@@ -2,6 +2,79 @@
     background-color : #fafafa;
     display: flex;
     flex-direction: column;
-    flex: 0.8 0.8;
+    flex: 1;
     height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+}
+
+.friends__top {
+    color: #3e2723;
+    display: flex;
+}
+
+.friends__top > .friends__top__info {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    padding: 10px;
+    padding-left: 20px;
+}
+.friends__top > .friends__top__info > h3 {
+    padding: 5px;
+}
+
+.friends__top > .friends__top__info > .friends__top__count {
+    color: lightgray;
+}
+
+.friends__top > .friends__top__add {
+    padding: 10px;
+    padding-right: 20px;
+}
+
+.friends__search {
+    border: none;
+    background-color: #f7f3f2;
+    border-radius: 5px;
+    width: 90vw;
+    min-height: 40px;
+    display: flex;
+    align-self: center;
+    margin: 10px;
+}
+
+.friends__search > .searchButton {
+    color: lightgray;
+    padding: 10px;
+}
+
+.friends__search > .searchInput {
+    color: black;
+    border: none;
+    background-color: inherit;
+    width: 100%;
+    outline-width: 0;
+}
+
+.friends__myprofile {
+    border: none;
+    border-radius: 5px;
+    width: 90vw;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 10px;
+}
+
+.friends__profile {
+    border: none;
+    border-radius: 5px;
+    width: 90vw;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 10px;
 }
