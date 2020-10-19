@@ -1,0 +1,7 @@
+.options {
+    background-color : #fafafa;
+    display: flex;
+    flex-direction: column;
+    flex: 0.8 0.8;
+    height: 100vh;
+}
