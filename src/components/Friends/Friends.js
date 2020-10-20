@@ -1,7 +1,7 @@
 import React from 'react';
 import './Friends.css';
 import { PersonAdd, Search } from '@material-ui/icons';
-import { Avatar } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
 import Profile from '../Profile/Profile.js';
 
 function Friends() {
@@ -12,7 +12,9 @@ function Friends() {
                     <h3>친구</h3>
                     <h3 className="friends__top__count">176</h3>
                 </div>
-                <PersonAdd className="friends__top__add"/>                
+                <IconButton>
+                    <PersonAdd className="friends__top__add"/>                
+                </IconButton>
             </div>
             <div className="friends__search">
                 <Search className="searchButton" />

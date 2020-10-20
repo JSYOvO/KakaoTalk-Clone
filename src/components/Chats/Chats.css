@@ -2,6 +2,69 @@
     background-color : #fafafa;
     display: flex;
     flex-direction: column;
-    flex: 0.8 0.8;
+    flex: 1;
     height: 100vh;
+    width: 100vw;
+    overflow: scroll;
+}
+
+.chats__top {
+    color: #3e2723;
+    display: flex;
+    margin: 10px;
+    margin-bottom: 0;
+}
+
+.chats__top > .chats__top__info {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    padding: 10px;
+    padding-left: 20px;
+}
+.chats__top > .chats__top__info > h3 {
+    padding: 5px;
+    padding-top: 10px;
+}
+.chats__top > .chats__top__info > .arrowdropdown {
+    color: lightgray;
+}
+.chats__top > .chats__top__add {
+    padding: 10px;
+    padding-right: 20px;
+}
+.chats__search {
+    border: none;
+    background-color: #f7f3f2;
+    border-radius: 5px;
+    width: 90vw;
+    min-height: 40px;
+    display: flex;
+    align-self: center;
+    margin: 10px;
+    margin-top: 0;
+}
+
+.chats__search > .searchButton {
+    color: lightgray;
+    padding: 10px;
+}
+
+.chats__search > .searchInput {
+    color: black;
+    border: none;
+    background-color: inherit;
+    width: 100%;
+    outline-width: 0;
+}
+
+.chats__talk {
+    border: none;
+    border-radius: 5px;
+    width: 90vw;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 10px;
 }

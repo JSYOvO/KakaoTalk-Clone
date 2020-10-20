@@ -31,5 +31,8 @@
     padding: 10px;
     color: gray;
     width: 100px;
-    
+}
+
+.sidebar__icon :hover {
+    color: beige;
 }
