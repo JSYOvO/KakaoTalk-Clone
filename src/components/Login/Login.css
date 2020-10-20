@@ -1,0 +1,47 @@
+
+.login {
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__logo > img {
+    width: 256px;
+    height: 172px;
+}
+
+.login__input {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__input > input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid lightgray;
+    margin: 2px;
+}
+
+.login__button {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.login__button > button {
+    width: 206px;
+    height: 30px;
+    border: 1px solid lightgray;
+    color: gray;
+    outline-width: 0;
+    margin: 2px;
+}
+
+.login__button > button:hover {
+    background-color: #3e2723;
+    color: white;
+}
