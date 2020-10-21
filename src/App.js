@@ -7,15 +7,17 @@ import Chats from './components/Chats/Chats.js';
 import Options from './components/Options/Options.js';
 import Login from './components/Login/Login.js';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
 
 function App() {
 
-  const [user, setUser] = useState("");
-
+  const user = useSelector(selectUser)
+  console.log(user);
   return (
     <Router>
       <div className="app">
-        {!user ? (<Login/>) : (
+        {!user.email ? (<Login/>) : (
           <>
             <Sidebar/>
             <Switch>
