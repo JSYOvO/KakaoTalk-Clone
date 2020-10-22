@@ -71,7 +71,7 @@ function Login() {
     return (
         <div className="login">
             <div className="login__logo">
-                <img src="https://lh3.googleusercontent.com/proxy/bDFo3natSAxAqy0vVQf4kXY4_x1fzse8VUQMTlEMkMFtAQD5mOXLbP2ZOtjEmbaBql-4SFBwedrwUNaEaLJfhV_y2Sk6HP86CYiimeXrdZitr7_gYQ_PaBtXgwnqLWX3fE2OIMH4emOlBQe4NP3F90UXE2aVbiplzjVKBBmG7nmDWLRv-BrY9pHKva1bSMI9YwguJcHoOu9bXzAelckJGAMEkSt2rUHZa9C-HpCHG40"/>
+                <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111496.svg"/>
             </div>
             <div className="login__input">
                 <input type="text" placeholder=" 이메일" value={email} onChange={e => setEmail(e.target.value)}/>

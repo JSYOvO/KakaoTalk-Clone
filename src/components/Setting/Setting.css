@@ -1,0 +1,75 @@
+.setting {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    color: #3e2723;
+}
+
+.setting__header {
+    background-color: #3e2723;
+    color: lightgray;
+    font-size: 10px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.setting__content {
+    display: flex;
+    height: 100%;
+}
+.setting__sidebar {
+    background-color: lightgray;
+    width: 110px;
+    font-size: 12px;
+    padding: 20px;
+}
+.setting__main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-size: 12px;
+    flex: 1;
+}
+.setting__main > .setting__main__info {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 20px;
+}
+
+.setting__main > .setting__main__info > .avatar {
+    width: 80px;
+    height: 80px;
+}
+.setting__main > .setting__main__info > p {
+    margin-left: 30px;
+}
+
+.setting__main > .setting__main__edit {
+    padding: 20px;
+}
+.setting__main > .setting__main__edit > p {
+    padding: 5px;
+}
+.setting__main > .setting__main__edit > input {
+    margin-left: 5px;
+    width: 95%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 20px;
+}
+.setting__main > button {
+    border-radius: 40px;   
+    width: 70px;
+    height: 30px;
+    align-self: center;
+    color: lightgray;
+    border: 1px solid lightgray;
+    background-color: white;
+}
+
+.setting__main > button:hover {
+    background-color: #3e2723;
+}

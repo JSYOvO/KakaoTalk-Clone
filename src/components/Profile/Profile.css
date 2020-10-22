@@ -14,3 +14,50 @@
 .profile > .avatar {
     margin: 10px;
 }
+
+.profile__modal {
+    font-size: 12px;
+}
+
+.profile__modal__upper {    
+    border-bottom: 1px solid lightgray;
+    width: 300px;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile__modal__upper > .avatar {
+    margin-top: 310px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.profile__modal__lower {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+.profile__modal__lower > .chat{    
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding-right: 10%;
+    align-items: center;
+}
+
+.profile__modal__lower > .chat > .icon{    
+    padding: 5px;
+}
+
+.profile__modal__lower > .profile{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile__modal__lower > .profile > .icon{    
+    padding: 5px;
+}
