@@ -33,14 +33,26 @@ function Login() {
                             profileUrl: "",
                             stateMessage: ""
                         });
+                        dispatch(login({
+                            email: email,
+                            profileName: "",
+                            profileUrl: "",
+                            stateMessage: ""
+                        }))
                     }
-
-                    dispatch(login({
-                        email: email,
-                        profileName: "",
-                        profileUrl: "",
-                        stateMessage: ""
-                    }))
+                    else {
+                        db.collection('users').doc(email).collection('info').onSnapshot(snapshot => (
+                            snapshot.docs.map(doc => {
+                                console.log(doc.data());
+                                dispatch(login({
+                                    email: doc.data().email,
+                                    profileName: doc.data().profileName,
+                                    profileUrl: doc.data().profileUrl,
+                                    stateMessage: doc.data().stateMessage
+                                }));
+                            })
+                        ));
+                    }                    
                 })
                 
                 history.push('/');
@@ -77,10 +89,10 @@ function Login() {
                 <input type="text" placeholder=" 이메일" value={email} onChange={e => setEmail(e.target.value)}/>
                 <input type="password" placeholder=" 비밀번호" value={password} onChange={e => setPassword(e.target.value)}/>
             </div>
-            <div className="login__button">
-                <button onClick={handleLogin}>로그인</button>
+            <form className="login__button">
+                <button onClick={handleLogin} type="submit">로그인</button>
                 <button onClick={handleJoin}>회원가입</button>
-            </div>
+            </form>
         </div>
     )
 }

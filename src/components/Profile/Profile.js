@@ -21,7 +21,7 @@ function Profile({email, name, imageUrl, statusMessage}) {
             <Dialog open={modalToggle} onClose={e => setModalToggle(false)} className="profile__modal">
                 <div className="profile__modal__upper">
                     <Avatar src={imageUrl} className="avatar"/>
-                    <h3>{name || email}</h3>
+                    <h3>{email || name}</h3>
                     <small>{statusMessage}</small>
                 </div>
                 <div className="profile__modal__lower">

@@ -11,19 +11,29 @@ function Setting({email, name, imageUrl, statusMessage}) {
     const [profileImgUrl, setProfileImgUrl] = useState(imageUrl);
     const [profileStatusMessage, setProfileStatusMessage] = useState(statusMessage);
     const dispatch = useDispatch();
+
+    const handleClickAvatar = () => {
+        console.log("handleClickAvatar()");
+    }
+
     const submit = () => {
+        const myInfo = db.collection('users').doc(email).collection('info');
+        
+        myInfo.onSnapshot(snapshot => {
+            const myInfos = snapshot.docs.map(doc => {
+                db.collection('users').doc(email).collection('info').doc(doc.id).update({
+                    profileName: profileName,
+                    profileUrl: profileImgUrl,
+                    stateMessage: profileStatusMessage
+                })
+            });
+        })
+        
         dispatch(editProfile({
             profileName: profileName,
             profileUrl: profileImgUrl,
             stateMessage: profileStatusMessage
         }))
-
-        // db.collection('users').doc(email).collection('info').where("email","==", email).get()
-        // .then(snapshot => {
-        //     if(!snapshot.empty){
-        //         console.log(snapshot);
-        //     }
-        // })
     }
 
     return (
@@ -37,7 +47,9 @@ function Setting({email, name, imageUrl, statusMessage}) {
                 </div>
                 <div className="setting__main">
                     <div className="setting__main__info">
-                        <Avatar src={imageUrl} className="avatar"/>
+                        <IconButton>
+                            <Avatar src={imageUrl} className="avatar" onClick={handleClickAvatar}/>
+                        </IconButton>
                         <p>계정    {email}</p>
                     </div>
                     <div className="setting__main__edit">

@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Friends.css';
 import { PersonAdd, Search } from '@material-ui/icons';
-import { Avatar, IconButton } from '@material-ui/core';
+import { Avatar, Dialog, IconButton } from '@material-ui/core';
 import Profile from '../Profile/Profile.js';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice.js';
+import { db } from '../../firebase';
 
 function Friends() {
 
     const user = useSelector(selectUser);
+    const [friendAddToggle, setFriendAddToggle] = useState(false);
+    const [friends, setFriends] = useState([]);
+    const [findFriendEmailToAdd, setFindFriendEmailToAdd] = useState('');
+    
+    useEffect(() => {
+        if(user){
+            db.collection('users').doc(user.email).collection('friends').onSnapshot(snapshot => (
+                snapshot.docs.map(doc => {
+                    setFriends(
+                        ...friends,
+                        doc.data()
+                    )
+                })
+            ))
+        }
+    }, []);
+
+    const handleSearchBtnToFindFriend = (e) => {
+        e.preventDefault();
+        db.collection('users').doc(findFriendEmailToAdd).collection('info').onSnapshot(snapshot => (
+            snapshot.docs.map(doc => {
+                db.collection('users').doc(user.email).collection('friends').add({
+                    email: doc.data().email,
+                    profileName: doc.data().profileName,
+                    profileUrl: doc.data().profileUrl,
+                    stateMessage: doc.data().stateMessage
+                });
+            })
+        ));
+        
+    }
 
     return (
         <div className="friends">
@@ -18,7 +50,7 @@ function Friends() {
                     <h3 className="friends__top__count">176</h3>
                 </div>
                 <IconButton>
-                    <PersonAdd className="friends__top__add"/>                
+                    <PersonAdd className="friends__top__add" onClick={e => setFriendAddToggle(true)}/> 
                 </IconButton>
             </div>
             <div className="friends__search">
@@ -31,17 +63,31 @@ function Friends() {
             </div>
             <div className="friends__profile">
                 <h3>친구</h3>
-                <Profile email="호랑@이" name="호랑이1" imageUrl="" statusMessage="어흥1"/>
-                <Profile email="호랑@이" name="호랑이2" imageUrl="" statusMessage="어흥2"/>
-                <Profile email="호랑@이" name="호랑이3" imageUrl="" statusMessage="어흥3"/>
-                <Profile email="호랑@이" name="호랑이4" imageUrl="" statusMessage="어흥4"/>
-                <Profile email="호랑@이" name="호랑이5" imageUrl="" statusMessage="어흥5"/>
-                <Profile email="호랑@이" name="호랑이6" imageUrl="" statusMessage="어흥6"/>
-                <Profile email="호랑@이" name="호랑이7" imageUrl="" statusMessage="어흥7"/>
-                <Profile email="호랑@이" name="호랑이8" imageUrl="" statusMessage="어흥8"/>
-                <Profile email="호랑@이" name="호랑이9" imageUrl="" statusMessage="어흥9"/>
-                <Profile email="호랑@이" name="호랑이10" imageUrl="" statusMessage="어흥10"/>
+                {Array(friends).map(friend => (
+                    <Profile 
+                        email={friend.email} 
+                        name={friend.profileName} 
+                        imageUrl={friend.profileUrl} 
+                        statusMessage={friend.stateMessage}
+                    />
+                ))}
+                {console.log("friends : ", friends)}
             </div>
+            <Dialog open={friendAddToggle} onClose={e => setFriendAddToggle(false)}  className="friends__toggle">
+                <div className="friends__toggle__tab">
+                    <h3>Email로 친구 추가</h3>
+                </div>
+                <form className="friends__toggle__search">
+                    <Search className="icon"/>
+                    <input type="text" placeholder="ID를 입력하세요" value={findFriendEmailToAdd} onChange={e => setFindFriendEmailToAdd(e.target.value)}/>
+                    <button type="submit" onClick={handleSearchBtnToFindFriend}></button>
+                </form>
+                <div className="friends__toggle__result">
+                    <p className="weight">Email ID로 친구를 추가 할 수 있습니다.</p>
+                    <p className="normal">상대가 카카오 아이디를 등록하고,</p>
+                    <p className="normal">검색허용한 경우 찾기가 가능합니다.</p>
+                </div>
+            </Dialog>
         </div>
     )
 }
