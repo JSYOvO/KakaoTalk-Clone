@@ -74,6 +74,8 @@ function Friends() {
 
         setFriendAddToggle(false);
         setFindFriendEmailToAdd('');
+        setFindFriendToggle(false);
+        setFindFriendInfo('');
     }
 
     return (

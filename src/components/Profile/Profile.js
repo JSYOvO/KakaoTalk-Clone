@@ -5,12 +5,14 @@ import { useState } from 'react';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import CreateIcon from '@material-ui/icons/Create';
 import Setting from '../Setting/Setting.js';
+import ChattingRoom from '../ChattingRoom/ChattingRoom.js';
 
 function Profile({email, name, imageUrl, statusMessage, me, filterText}) {
 
     const [modalToggle, setModalToggle] = useState(false);
     const [profileEditToggle, setProfileEditToggle] = useState(false);
     const [showProfile, setShowProfile] = useState(true);
+    const [chattingRoomToggle, setChattingRoomToggle] = useState(false);
     useEffect(() => {
         if(filterText && (email.indexOf(filterText) >= 0 || name.indexOf((filterText)) >= 0)){
             setShowProfile(true);
@@ -40,7 +42,7 @@ function Profile({email, name, imageUrl, statusMessage, me, filterText}) {
                         <div className="profile__modal__lower">
                             <div className="chat">
                                 <IconButton>
-                                    <ChatBubbleIcon className="icon"/>
+                                    <ChatBubbleIcon className="icon" onClick={e => setChattingRoomToggle(true)}/>
                                 </IconButton>
                                 <h3>채팅하기</h3>
                             </div>
@@ -56,6 +58,17 @@ function Profile({email, name, imageUrl, statusMessage, me, filterText}) {
                     </Dialog>
                     <Dialog open={profileEditToggle} onClose={e => setProfileEditToggle(false)} className="profile__modal2">
                         <Setting  email={email} name={name} imageUrl={imageUrl} statusMessage={statusMessage}/>
+                    </Dialog>
+                    
+                    <Dialog open={chattingRoomToggle} onClose={e => setChattingRoomToggle(false)} className="profile__chattingRoom">
+                        <ChattingRoom
+                            email={email} 
+                            name={name} 
+                            imageUrl={imageUrl} 
+                            statusMessage={statusMessage}
+                            me={me}
+                            filterText={filterText}
+                        />
                     </Dialog>
                 </div>
             }
