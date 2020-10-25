@@ -21,9 +21,17 @@ function Friends() {
 
     useEffect(() => {
         if(user){
+            
             db.collection('users').doc(user.email).collection('friends').onSnapshot(snapshot => (  
                 snapshot.docs.map(doc => {
-                    setFriends(prevFriends => [...prevFriends, doc.data()])
+
+                    db.collection('users').doc(doc.data().email).collection('info').onSnapshot(snapshot2 => (
+                        snapshot2.docs.map(doc2 => {
+                            setFriends(prevFriends => [...prevFriends, doc2.data()])
+                        })
+                    ))
+
+                    // setFriends(prevFriends => [...prevFriends, doc.data()])
                     setFriendCount(friendCount => friendCount + 1);
                 })
             ))
@@ -100,7 +108,7 @@ function Friends() {
                     />
                 ))}
             </div>
-            <Dialog open={friendAddToggle} onClose={e => setFriendAddToggle(false) & setFindFriendToggle(false) & setFindFriendEmailToAdd('')}  className="friends__toggle">
+            <Dialog open={friendAddToggle} onClose={e => setFriendAddToggle(false) & setFindFriendToggle(false) & setFindFriendEmailToAdd('') & setFindFriendInfo('')}  className="friends__toggle">
                 <div className="friends__toggle__tab">
                     <h3>Email로 친구 추가</h3>
                 </div>
