@@ -29,7 +29,7 @@
 .login__button {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    
 }
 
 .login__button > button {

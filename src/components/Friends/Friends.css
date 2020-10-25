@@ -58,6 +58,10 @@
     outline-width: 0;
 }
 
+.friends__search > button {
+    display: none;
+}
+
 .friends__myprofile {
     border: none;
     border-radius: 5px;
@@ -125,4 +129,40 @@
 .friends__toggle__result > .normal{
     font-weight: 300;
     font-size: 12px;
+}
+
+.friends__toggle__result__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    padding: 100px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.friends__toggle__result__data > .avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.friends__toggle__result__data > p {
+    margin-bottom: 20px;
+}
+.friends__toggle__result__data > button {
+    border: 1px solid lightgray;
+    background-color: yellow;
+    border-radius: 20px;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    width: 100px;
+    height: 40px;
+}
+
+.friends__toggle__result__data > button:hover {
+    background-color: #3e2723;
+    color: #fafafa;
+    
 }
