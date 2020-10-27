@@ -1,11 +1,73 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Chats.css';
 import { AddCircle, ArrowDropDown, Search } from '@material-ui/icons';
-import { Avatar, IconButton } from '@material-ui/core';
+import { Avatar, Dialog, IconButton } from '@material-ui/core';
 import Talk from '../Talk/Talk.js'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
+import { db } from '../../firebase';
+import { selectFriends } from '../../features/friendsSlice';
 const tag = '[Chats]';
 
 function Chats() {
+
+    const user = useSelector(selectUser);
+    const friends = useSelector(selectFriends);
+    const [chats, setChats] = useState([]);
+    const [findChatPartnerToggle, setFindChatPartnerToggle] = useState(false);
+    const [findFriendToChat, setFindFriendToChat] = useState('');
+    const [findFriendToggle, setFindFriendToggle] = useState(false);
+    const [findFriendInfo, setFindFriendInfo] = useState({});
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        db.collection('users').doc(user.email).collection('chats').onSnapshot(snapshot => {
+            setChats(
+                snapshot.docs.map(doc => ({
+                    id : doc.id,
+                    data: doc.data()
+                }))
+            )
+        })
+    }, []);
+
+    const handleSearchBtnToFindFriend = (e) => {
+        e.preventDefault();
+
+        // db.collection('users').doc(findFriendToChat).collection('info').onSnapshot(snapshot => (
+        //     snapshot.docs.map(doc => {
+        //         setFindFriendInfo({
+        //             email: doc.data().email,
+        //             profileName: doc.data().profileName,
+        //             profileUrl: doc.data().profileUrl,
+        //             stateMessage: doc.data().stateMessage
+        //         })
+        //         setFindFriendToggle(true);
+        //     })
+        // ));
+        
+        console.log(friends);
+        friends.info.map(friend => {
+            if(friend.profileName === findFriendToChat){
+                setFindFriendInfo({
+                    email: friend.email,
+                    profileName: friend.profileName,
+                    profileUrl: friend.profileUrl,
+                    stateMessage: friend.stateMessage
+                })
+                setFindFriendToggle(true);
+            }
+        })
+
+        console.log(findFriendInfo);
+    }
+
+    const handleClickBtnToAddPartner = (e) => {
+        e.preventDefault();
+
+
+    }
+
     return (
         <div className="chats">
             <div className="chats__top">                
@@ -16,7 +78,7 @@ function Chats() {
                     </IconButton>
                 </div>
                 <IconButton>
-                    <AddCircle className="chats__top__add"/>
+                    <AddCircle className="chats__top__add" onClick={e => setFindChatPartnerToggle(true)}/>
                 </IconButton>
             </div>
 
@@ -26,17 +88,31 @@ function Chats() {
             </div>
 
             <div className="chats__talk">
-                <Talk name="호랑이1" imageUrl="" lastMessage="어흥1" lastUpdataTime="20201001000001"/>
-                <Talk name="호랑이2" imageUrl="" lastMessage="어흥2" lastUpdataTime="20201001000002"/>
-                <Talk name="호랑이3" imageUrl="" lastMessage="어흥3" lastUpdataTime="20201001000003"/>
-                <Talk name="호랑이4" imageUrl="" lastMessage="어흥4" lastUpdataTime="20201001000004"/>
-                <Talk name="호랑이5" imageUrl="" lastMessage="어흥5" lastUpdataTime="20201001000005"/>
-                <Talk name="호랑이6" imageUrl="" lastMessage="어흥6" lastUpdataTime="20201001000006"/>
-                <Talk name="호랑이7" imageUrl="" lastMessage="어흥7" lastUpdataTime="20201001000007"/>
-                <Talk name="호랑이8" imageUrl="" lastMessage="어흥8" lastUpdataTime="20201001000008"/>
-                <Talk name="호랑이9" imageUrl="" lastMessage="어흥9" lastUpdataTime="20201001000009"/>
-                <Talk name="호랑이10" imageUrl="" lastMessage="어흥10" lastUpdataTime="20201001000010"/>
+                
             </div>
+
+            <Dialog open={findChatPartnerToggle} onClose={e => setFindChatPartnerToggle(false)} className="chats__dialog">
+                <div className="chats__dialog__tab">
+                    <h3>채팅할 대화상대를 검색해주세요.</h3>
+                </div>
+                <form className="chats__dialog__search">
+                    <Search className="icon"/>
+                    <input type="text" placeholder="ID를 입력하세요" value={findFriendToChat} onChange={e => setFindFriendToChat(e.target.value)}/>
+                    <button type="submit" onClick={handleSearchBtnToFindFriend}></button>
+                </form>
+                {!findFriendToggle &&
+                    <div className="chats__toggle__result">
+                        <p className="weight">Email ID로 채팅할 친구를 선택 할 수 있습니다.</p>
+                    </div>
+                }
+                {findFriendToggle &&
+                    <div className="chats__toggle__result__data">
+                        <Avatar src={findFriendInfo?.profileUrl} className="avatar"/>
+                        <p>{findFriendInfo.profileName || findFriendInfo.email}</p>
+                        <button onClick={handleClickBtnToAddPartner}>친구 추가</button>
+                    </div>
+                }
+            </Dialog>
         </div>
     )
 }

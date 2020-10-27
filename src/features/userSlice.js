@@ -14,6 +14,7 @@ export const userSlice = createSlice({
             state.profileName = action.payload.profileName;
             state.profileUrl = action.payload.profileUrl;
             state.stateMessage = action.payload.stateMessage;
+
         },
         logout: (state) => {
             state.email = null;

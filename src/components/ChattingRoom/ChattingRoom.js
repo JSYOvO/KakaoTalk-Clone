@@ -2,10 +2,19 @@ import { Avatar } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 import MoodIcon from '@material-ui/icons/Mood';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
-import React from 'react';
+import React, { useState } from 'react';
 import './ChattingRoom.css';
+import { db } from '../../firebase';
 
 function ChattingRoom({email, name, imageUrl, statusMessage, me, filterText}) {
+    
+    const [chatMessage, setChatMessage] = useState('');
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        
+    }
     return (
         <div className="chattingroom">
             <div className="chattingroom__header">
@@ -25,10 +34,10 @@ function ChattingRoom({email, name, imageUrl, statusMessage, me, filterText}) {
                 <div className="func">
                     <MoodIcon/>
                 </div>
-                <div className="messagebox">
-                    <input type="text"/>
-                    <button>전송</button>
-                </div>
+                <form className="messagebox">
+                    <textarea type="text" value={chatMessage} onChange={e => setChatMessage(e.target.value)}/>
+                    <button type="submit" onClick={handleSubmit}>전송</button>
+                </form>
             </div>
         </div>
     )

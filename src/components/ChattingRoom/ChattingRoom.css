@@ -3,7 +3,7 @@
     margin: 10px;
     flex-direction: column;
     width: 400px;
-    height: 640px;
+    height: 630px;
     margin: 0;
 }
 
@@ -38,6 +38,14 @@
 .chattingroom__main {
     background-color: lightskyblue;
     height: 70%;
+    overflow: scroll;
+}
+.chattingroom__main::-webkit-scrollbar {
+    display: none;
+}
+.chattingroom__main::-webkit-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .chattingroom__bottom {
     display: flex;
@@ -57,15 +65,23 @@
     height: 70%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-.chattingroom__bottom > .messagebox > input {
+.chattingroom__bottom > .messagebox > textarea {
     height: 80%;
-    width: 80%;
+    width: 75%;
     border: none;
+    outline-width: 0;
+    
 }
 .chattingroom__bottom > .messagebox > button {
     height: 70%;
     width: 16%;
     border: 1px solid lightgrey;
     border-radius: 6px;
+}
+
+.chattingroom__bottom > .messagebox > button:hover {
+    color: lightgrey;
+    background-color: #3e2723;
 }

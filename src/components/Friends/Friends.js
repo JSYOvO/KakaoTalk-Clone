@@ -3,14 +3,17 @@ import './Friends.css';
 import { PersonAdd, Search } from '@material-ui/icons';
 import { Avatar, Dialog, IconButton } from '@material-ui/core';
 import Profile from '../Profile/Profile.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice.js';
 import { db } from '../../firebase';
+import { reset, selectFriends } from '../../features/friendsSlice';
 const tag = '[Friends]';
 
 function Friends() {
 
     const user = useSelector(selectUser);
+    const friendsRedux = useSelector(selectFriends);
+    const dispatch = useDispatch();
     const [friendAddToggle, setFriendAddToggle] = useState(false);
     const [friends, setFriends] = useState([]);
     const [findFriendEmailToAdd, setFindFriendEmailToAdd] = useState('');
@@ -37,6 +40,10 @@ function Friends() {
             ))
         }
     }, []);
+
+    useEffect(() => {
+        dispatch(reset(friends));
+    },[friends]);
 
     const handleSearchBtnToFindFriend = (e) => {
         e.preventDefault();
