@@ -1,7 +1,7 @@
 .message {
     display: flex;
     align-items: center;
-    position: relative;
+    /* position: relative; */
     width: fit-content;
     justify-content: space-between;
     margin: 15px;
@@ -10,18 +10,19 @@
 .message > p {
     background-color: #f3f3f5;
     font-size: medium;
-    padding: 15px;
-    border-radius: 20px;
-    margin: 10px;
+    padding: 6px;
+    border-radius: 10px;
+    margin: 8px;
     margin-right: auto;
+    background-color: white;
 }
 
 .message > small {
     color: gray;
-    position: absolute;
+    /* position: absolute; */
     font-size: 8px;
-    bottom: -5px;
-    right: 0;
+    /* bottom: -5px; */
+    /* right: 0; */
 }
 
 .message__sender {
@@ -30,12 +31,12 @@
 
 .message__sender > .message__photo {
     order: 1;
-    margin: 15px;
+    margin: 8px;
 }
 
 .message__sender > p {
-    background-color: #3cabfa;
-    color: white;
+    background-color: yellow;
+    color: black;
 }
 
 .message__photo {

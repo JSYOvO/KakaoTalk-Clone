@@ -63,7 +63,7 @@ function DetailChatRoom({id, email, name, imageUrl, statusMessage, me}) {
                     <MoodIcon/>
                 </div>
                 <form className="messagebox">
-                    <textarea type="text" value={chatMessage} onChange={e => setChatMessage(e.target.value)}/>
+                    <input type="text" value={chatMessage} onChange={e => setChatMessage(e.target.value)}/>
                     <button type="submit" onClick={handleSubmit}>전송</button>
                 </form>
             </div>

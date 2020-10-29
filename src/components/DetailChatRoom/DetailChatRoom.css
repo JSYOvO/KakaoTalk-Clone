@@ -67,7 +67,7 @@
     align-items: center;
     justify-content: center;
 }
-.detailChattingroom__bottom > .messagebox > textarea {
+.detailChattingroom__bottom > .messagebox > input {
     height: 80%;
     width: 75%;
     border: none;
@@ -79,7 +79,7 @@
     width: 16%;
     border: 1px solid lightgrey;
     border-radius: 6px;
-}
+} 
 
 .detailChattingroom__bottom > .messagebox > button:hover {
     color: lightgrey;
