@@ -21,14 +21,18 @@ function Chats() {
     const [findFriendToggle, setFindFriendToggle] = useState(false);
     const [findFriendInfo, setFindFriendInfo] = useState({});
     const [filterCondition, setFilterCondition] = useState("");
+    const [partnerIdx, setPartnerIdx] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
         
-        db.collection('users').doc(user.email).collection('chatWith').onSnapshot(snapshot => {
+        db.collection('chatRoom').onSnapshot(snapshot => {
             setChattingRooms([]);
             snapshot.docs.map(doc => {
-               setChattingRooms(prevChattingRooms => [...prevChattingRooms, doc.data()])
+               setChattingRooms(prevChattingRooms => [...prevChattingRooms, [doc.id, doc.data()]])
+            
+               doc.data().userList[0] === user.email ? setPartnerIdx(1) : setPartnerIdx(0);
+               
             })
         })
     }, []);
@@ -55,19 +59,16 @@ function Chats() {
     const handleClickBtnToAddPartner = (e) => {
         e.preventDefault();
 
-        db.collection('users').doc(user.email).collection('chatWith').where("chatWithProfileName","==",findFriendInfo.profileName).get()
+        db.collection('chatRoom').where("userList","array-contains",findFriendInfo.email).get()
         .then(snapshot => {
             if(snapshot.empty){
-                db.collection('users').doc(user.email).collection('chatWith').add({
-                    chatWithEmail: findFriendInfo.email,
-                    chatWithProfileName: findFriendInfo.profileName,
-                    chatWithProfileUrl: findFriendInfo.profileUrl,
-                    chatWithStateMessage: findFriendInfo.stateMessage,
-                    timestamp: null,
-                    message: null
+                db.collection('chatRoom').add({
+                    userList: [user.email, findFriendInfo.email],
+                    userProfileName: [user.profileName, findFriendInfo.profileName],
+                    userProfileUrl: [user.profileUrl, findFriendInfo.profileUrl],
+                    userStateMessage: [user.stateMessage, findFriendInfo.stateMessage],
                 })
             }
-
         })
 
         setFindChatPartnerToggle(false);
@@ -98,14 +99,18 @@ function Chats() {
             </div>
 
             <div className="chats__talk">
-                {chattingRooms.map(chattingRoom => (
+
+                {
+                console.log(chattingRooms),
+                chattingRooms.map(chattingRoom => (
                     <ChatRoom
-                        chatWithEmail= {chattingRoom.chatWithEmail}
-                        chatWithProfileName= {chattingRoom.chatWithProfileName}
-                        chatWithProfileUrl= {chattingRoom.chatWithProfileUrl}
-                        chatWithStateMessage= {chattingRoom.chatWithStateMessage}
-                        timestamp= {chattingRoom.timestamp}
-                        message= {chattingRoom.message}
+                        id = {chattingRoom[0]}
+                        chatWithEmail= {chattingRoom[1].userList[partnerIdx]}
+                        chatWithProfileName= {chattingRoom[1].userProfileName[partnerIdx]}
+                        chatWithProfileUrl= {chattingRoom[1].userProfileUrl[partnerIdx]}
+                        chatWithStateMessage= {chattingRoom[1].userStateMessage[partnerIdx]}
+                        timestamp= {chattingRoom[1].timestamp}
+                        message= ""
                         filterCondition= {filterCondition}
                     />
                 ))}

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import CreateIcon from '@material-ui/icons/Create';
 import Setting from '../Setting/Setting.js';
-import ChattingRoom from '../ChattingRoom/ChattingRoom.js';
+import DetailChatRoom from '../DetailChatRoom/DetailChatRoom.js';
 
 function Profile({email, name, imageUrl, statusMessage, me, filterText}) {
 
@@ -61,13 +61,12 @@ function Profile({email, name, imageUrl, statusMessage, me, filterText}) {
                     </Dialog>
                     
                     <Dialog open={chattingRoomToggle} onClose={e => setChattingRoomToggle(false)} className="profile__chattingRoom">
-                        <ChattingRoom
+                        <DetailChatRoom
                             email={email} 
                             name={name} 
                             imageUrl={imageUrl} 
                             statusMessage={statusMessage}
                             me={me}
-                            filterText={filterText}
                         />
                     </Dialog>
                 </div>

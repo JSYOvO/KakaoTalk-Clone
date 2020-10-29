@@ -1,4 +1,4 @@
-.chattingroom {
+.detailChattingroom {
     display: flex;
     margin: 10px;
     flex-direction: column;
@@ -7,12 +7,12 @@
     margin: 0;
 }
 
-.chattingroom__header {
+.detailChattingroom__header {
     display: flex;
     height: 10%;
     border-bottom: 1px solid lightgrey;
 }
-.chattingroom__header > .avatar {
+.detailChattingroom__header > .avatar {
     width: 46px;
     height: 46px;
     display: flex;
@@ -20,39 +20,39 @@
     margin-right: 14px;
     margin-left: 6px;
 }
-.chattingroom__header > .userInfo {
+.detailChattingroom__header > .userInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.chattingroom__header > .userInfo >.userCnt {
+.detailChattingroom__header > .userInfo >.userCnt {
     display: flex;
 }
-.chattingroom__header > .userInfo >.userCnt > small {
+.detailChattingroom__header > .userInfo >.userCnt > small {
     padding-left: 5px;
 }
-.chattingroom__header > .userInfo >.userCnt > .icon {
+.detailChattingroom__header > .userInfo >.userCnt > .icon {
     width: 20px;
     height: 20px;
 }
-.chattingroom__main {
+.detailChattingroom__main {
     background-color: lightskyblue;
     height: 70%;
     overflow: scroll;
 }
-.chattingroom__main::-webkit-scrollbar {
+.detailChattingroom__main::-webkit-scrollbar {
     display: none;
 }
-.chattingroom__main::-webkit-scrollbar {
+.detailChattingroom__main::-webkit-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.chattingroom__bottom {
+.detailChattingroom__bottom {
     display: flex;
     flex-direction: column;
     height: 20%;
 }
-.chattingroom__bottom > .func {
+.detailChattingroom__bottom > .func {
     background-color: rgb(248, 248, 248);
     border-top: 1px solid lightgray;
     height: 30%;
@@ -60,28 +60,28 @@
     align-items: center;
     padding-left: 5px;
 }
-.chattingroom__bottom > .messagebox {
+.detailChattingroom__bottom > .messagebox {
     border-top: 1px solid lightgray;
     height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.chattingroom__bottom > .messagebox > textarea {
+.detailChattingroom__bottom > .messagebox > textarea {
     height: 80%;
     width: 75%;
     border: none;
     outline-width: 0;
     
 }
-.chattingroom__bottom > .messagebox > button {
+.detailChattingroom__bottom > .messagebox > button {
     height: 70%;
     width: 16%;
     border: 1px solid lightgrey;
     border-radius: 6px;
 }
 
-.chattingroom__bottom > .messagebox > button:hover {
+.detailChattingroom__bottom > .messagebox > button:hover {
     color: lightgrey;
     background-color: #3e2723;
 }
