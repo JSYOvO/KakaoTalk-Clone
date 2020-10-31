@@ -26,11 +26,11 @@ function Sidebar() {
                         <ChatBubble className="sidebar__icon"/>
                     </IconButton>                    
                 </Link>
-                <Link to="/options">
+                {/* <Link to="/options"> */}
                     <IconButton>
                         <MoreHoriz className="sidebar__icon"/>
                     </IconButton>
-                </Link>
+                {/* </Link> */}
             </div>
 
             <div className="sidebar__compLower">

@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './Chats.css';
 import { AddCircle, ArrowDropDown, Search } from '@material-ui/icons';
 import { Avatar, Dialog, IconButton } from '@material-ui/core';
-import Talk from '../Talk/Talk.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
 import { db } from '../../firebase';
 import { selectFriends } from '../../features/friendsSlice';
-import firebase from 'firebase';
 import ChatRoom from '../ChatRoom/ChatRoom.js';
 const tag = '[Chats]';
 
@@ -22,11 +20,11 @@ function Chats() {
     const [findFriendInfo, setFindFriendInfo] = useState({});
     const [filterCondition, setFilterCondition] = useState("");
     const [partnerIdx, setPartnerIdx] = useState(0);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         setChattingRooms([]);
-        db.collection('chatRoom').onSnapshot(snapshot => {
+
+        db.collection('chatRoom').orderBy('lastTimestamp','desc').onSnapshot(snapshot => {
             setChattingRooms([]);
             snapshot.docs.map(doc => {
                 if(doc.data().userList[0] === user.email || doc.data().userList[1] === user.email){
@@ -64,6 +62,8 @@ function Chats() {
                     userProfileName: [user.profileName, findFriendInfo.profileName],
                     userProfileUrl: [user.profileUrl, findFriendInfo.profileUrl],
                     userStateMessage: [user.stateMessage, findFriendInfo.stateMessage],
+                    lastMessage: "",
+                    lastTimestamp: null
                 })
             }
         })
@@ -104,8 +104,8 @@ function Chats() {
                         chatWithProfileName= {chattingRoom[1].userProfileName[partnerIdx]}
                         chatWithProfileUrl= {chattingRoom[1].userProfileUrl[partnerIdx]}
                         chatWithStateMessage= {chattingRoom[1].userStateMessage[partnerIdx]}
-                        timestamp= {chattingRoom[1].timestamp}
-                        message= ""
+                        timestamp= {chattingRoom[1].lastTimestamp}
+                        message= {chattingRoom[1].lastMessage}
                         filterCondition= {filterCondition}
                     />
                 ))}

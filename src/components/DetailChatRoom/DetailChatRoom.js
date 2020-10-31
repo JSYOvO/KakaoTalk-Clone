@@ -30,6 +30,8 @@ function DetailChatRoom({id, email, name, imageUrl, statusMessage, me}) {
                 }
             }
         )
+        console.log("handleSubmit()")
+
     }, [])
 
     const handleSubmit = (e) => {
@@ -44,7 +46,13 @@ function DetailChatRoom({id, email, name, imageUrl, statusMessage, me}) {
             stateMessage: user.stateMessage
         });
 
+        db.collection('chatRoom').doc(id).update({
+            lastMessage: chatMessage,
+            lastTimestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
         setChatMessage("");
+        console.log("handleSubmit()")
     }
     return (
         <div className="detailChattingroom">
