@@ -111,7 +111,7 @@ function Friends() {
                         email={friend.email} 
                         name={friend.profileName} 
                         imageUrl={friend.profileUrl} 
-                        statusMessage={friend.stateMessage}
+                        stateMessage={friend.stateMessage}
                         me={false}
                         filterText={filterCondition}
                     />

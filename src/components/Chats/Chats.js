@@ -25,14 +25,14 @@ function Chats() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        
+        setChattingRooms([]);
         db.collection('chatRoom').onSnapshot(snapshot => {
             setChattingRooms([]);
             snapshot.docs.map(doc => {
-               setChattingRooms(prevChattingRooms => [...prevChattingRooms, [doc.id, doc.data()]])
-            
-               doc.data().userList[0] === user.email ? setPartnerIdx(1) : setPartnerIdx(0);
-               
+                if(doc.data().userList[0] === user.email || doc.data().userList[1] === user.email){
+                    setChattingRooms(prevChattingRooms => [...prevChattingRooms, [doc.id, doc.data()]])
+                    doc.data().userList[0] === user.email ? setPartnerIdx(1) : setPartnerIdx(0);
+                }
             })
         })
     }, []);
@@ -40,7 +40,6 @@ function Chats() {
     const handleSearchBtnToFindFriend = (e) => {
         e.preventDefault();
         
-        console.log(friends);
         friends.info.map(friend => {
             if(friend.profileName === findFriendToChat){
                 setFindFriendInfo({
@@ -52,8 +51,6 @@ function Chats() {
                 setFindFriendToggle(true);
             }
         })
-
-        console.log(findFriendInfo);
     }
 
     const handleClickBtnToAddPartner = (e) => {
@@ -99,9 +96,7 @@ function Chats() {
             </div>
 
             <div className="chats__talk">
-
                 {
-                console.log(chattingRooms),
                 chattingRooms.map(chattingRoom => (
                     <ChatRoom
                         id = {chattingRoom[0]}

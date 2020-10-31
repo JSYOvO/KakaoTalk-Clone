@@ -12,26 +12,20 @@
     font-size: medium;
     padding: 6px;
     border-radius: 10px;
-    margin: 8px;
+    margin-bottom: 3px;
+    margin-right: auto;
     margin-right: auto;
     background-color: white;
 }
 
 .message > small {
     color: gray;
-    /* position: absolute; */
     font-size: 8px;
-    /* bottom: -5px; */
-    /* right: 0; */
+    padding-left: 8px;
 }
 
 .message__sender {
     margin-left: auto;
-}
-
-.message__sender > .message__photo {
-    order: 1;
-    margin: 8px;
 }
 
 .message__sender > p {
@@ -39,6 +33,10 @@
     color: black;
 }
 
-.message__photo {
-    order: 0;
+.message__sender > small {
+    padding-right: 8px;
+}
+
+.message >.message__photo {
+    margin-right: 10px;
 }

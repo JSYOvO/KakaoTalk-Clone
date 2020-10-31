@@ -12,13 +12,25 @@ const Message = forwardRef(({
 
     const user = useSelector(selectUser);
     const time = new Date(timestamp?.toDate());
-    const timeToShowFormat = `${time.getHours().toLocaleString()}:${time.getMinutes().toLocaleString()}`;
+    const timeToShowFormat = `${time.getHours() < 10 ? `0${time.getHours().toString()}`:time.getHours().toString()}:${time.getMinutes() < 10 ? `0${time.getMinutes().toString()}` : time.getMinutes().toLocaleString()}`;
     return (
-        <div ref={ref} className={`message ${user.email === email && 'message__sender'}`}>
-            {user.email !== email && <Avatar className="message__photo" src={profileUrl}/>}
-            <small>{timeToShowFormat}</small>
-            <p>{message}</p>
-        </div>
+        <>
+            {user.email !== email &&
+                <div ref={ref} className="message">
+                    {user.email !== email && <Avatar className="message__photo" src={profileUrl}/>}
+                    <p>{message}</p>
+                    <small>{timeToShowFormat}</small>
+                </div>
+            }
+            {user.email === email &&
+                <div ref={ref} className="message message__sender">
+                    {user.email !== email && <Avatar className="message__photo" src={profileUrl}/>}
+                    <small>{timeToShowFormat}</small>
+                    <p>{message}</p>
+                </div>
+            }
+        </>
+        
     )
 })
 

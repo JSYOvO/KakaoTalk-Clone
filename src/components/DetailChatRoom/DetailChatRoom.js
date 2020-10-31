@@ -2,7 +2,7 @@ import { Avatar } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 import MoodIcon from '@material-ui/icons/Mood';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
-import React, { useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import './DetailChatRoom.css';
 import { db } from '../../firebase';
 import { selectUser } from '../../features/userSlice';
@@ -15,14 +15,19 @@ function DetailChatRoom({id, email, name, imageUrl, statusMessage, me}) {
     const [chatMessage, setChatMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const user = useSelector(selectUser);
+    const [myRef, setMyRef] = useState(() => createRef());
     
     useEffect(() => {
+        setMessages([]);
         db.collection('chatRoom').doc(id).collection('messaging').orderBy('timestamp','asc')
         .onSnapshot(snapshot => {
                 setMessages(snapshot.docs.map(doc => ({
                     id : doc.id,
                     data : doc.data()
                 })))
+                if(myRef.current) {
+                    myRef.current.scrollTop = myRef.current?.scrollHeight || 0 - myRef.current?.clientHeight || 0;
+                }
             }
         )
     }, [])
@@ -53,7 +58,7 @@ function DetailChatRoom({id, email, name, imageUrl, statusMessage, me}) {
                     </div>
                 </div>
             </div>
-            <div className="detailChattingroom__main">
+            <div className="detailChattingroom__main" ref={myRef}>
                 {messages.map(({id, data}) => (
                     <Message key={id} contents={data} />
                 ))}
