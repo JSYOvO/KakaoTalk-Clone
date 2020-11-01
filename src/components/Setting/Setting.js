@@ -5,23 +5,29 @@ import { useDispatch } from 'react-redux';
 import { editProfile } from '../../features/userSlice';
 import { db } from '../../firebase';
 
-function Setting({email, name, imageUrl, statusMessage}) {
+function Setting({email, name, imageUrl, stateMessage}) {
 
     const [profileName, setProfileName] = useState(name);
     const [profileImgUrl, setProfileImgUrl] = useState(imageUrl);
-    const [profileStatusMessage, setProfileStatusMessage] = useState(statusMessage);
+    const [profileStatusMessage, setProfileStatusMessage] = useState(stateMessage);
+    const [updateDocId, setUpdateDocId] = useState("");
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if(updateDocId){
+            db.collection('users').doc(email).collection('info').doc(updateDocId).update({
+                profileName: profileName,
+                profileUrl: profileImgUrl,
+                stateMessage: profileStatusMessage
+            })   
+            setUpdateDocId("");
+        }
+    },[updateDocId])
+
     const submit = () => {
-        const myInfo = db.collection('users').doc(email).collection('info');
-        
-        myInfo.onSnapshot(snapshot => {
+        db.collection('users').doc(email).collection('info').onSnapshot(snapshot => {
             snapshot.docs.map(doc => {
-                db.collection('users').doc(email).collection('info').doc(doc.id).update({
-                    profileName: profileName,
-                    profileUrl: profileImgUrl,
-                    stateMessage: profileStatusMessage
-                })
+                setUpdateDocId(doc.id);
             });
         })
         

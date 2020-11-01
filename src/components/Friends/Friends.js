@@ -24,8 +24,7 @@ function Friends() {
 
     useEffect(() => {
         if(user){
-            
-            db.collection('users').doc(user.email).collection('friends').onSnapshot(snapshot => (  
+            db.collection('users').doc(user.email).collection('friends').orderBy('profileName','asc').onSnapshot(snapshot => (  
                 snapshot.docs.map(doc => {
 
                     db.collection('users').doc(doc.data().email).collection('info').onSnapshot(snapshot2 => (
@@ -102,16 +101,16 @@ function Friends() {
             </div>
             <div className="friends__myprofile">
                 <h3>내 프로필</h3>
-                <Profile email={user.email} name={user.profileName} imageUrl={user.profileUrl} statusMessage={user.stateMessage} me={true}/>
+                <Profile email={user?.email} name={user?.profileName} imageUrl={user?.profileUrl} stateMessage={user?.stateMessage} me={true}/>
             </div>
             <div className="friends__profile">
                 <h3>친구</h3>
                 {friends?.map(friend => (
                     <Profile 
-                        email={friend.email} 
-                        name={friend.profileName} 
-                        imageUrl={friend.profileUrl} 
-                        stateMessage={friend.stateMessage}
+                        email={friend?.email} 
+                        name={friend?.profileName} 
+                        imageUrl={friend?.profileUrl} 
+                        stateMessage={friend?.stateMessage}
                         me={false}
                         filterText={filterCondition}
                     />

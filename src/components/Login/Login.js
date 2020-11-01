@@ -39,14 +39,20 @@ function Login() {
                         }))
                     }
                     else {
+                        let dispatchLoginCnt = 0;
+
                         db.collection('users').doc(email).collection('info').onSnapshot(snapshot => (
                             snapshot.docs.map(doc => {
-                                dispatch(login({
-                                    email: doc.data().email,
-                                    profileName: doc.data().profileName,
-                                    profileUrl: doc.data().profileUrl,
-                                    stateMessage: doc.data().stateMessage
-                                }));
+
+                                if(dispatchLoginCnt === 0){
+                                    dispatch(login({
+                                        email: doc.data().email,
+                                        profileName: doc.data().profileName,
+                                        profileUrl: doc.data().profileUrl,
+                                        stateMessage: doc.data().stateMessage
+                                    }));
+                                    dispatchLoginCnt++;
+                                }
                             })
                         ));
                     }                    
