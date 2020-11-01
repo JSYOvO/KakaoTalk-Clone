@@ -75,6 +75,7 @@ function Login() {
                     // history.push('/Join');
                     setEmail('');
                     setPassword('');
+                    alert("Thank you for joining KakaoTalk. Please log in.");
                 }
             })
             .catch(error => alert(error.message));
