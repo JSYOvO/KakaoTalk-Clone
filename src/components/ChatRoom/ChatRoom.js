@@ -38,7 +38,7 @@ function ChatRoom({id, chatWithEmail, chatWithProfileName, chatWithProfileUrl, c
 
     return (
         <>
-            {showProfile &&
+            {(showProfile && lastTimestamp) &&
                 <div className="chatroom" onClick={e => setDetailChatRoomToggle(true)}>
                     <Avatar src={chatWithProfileUrl} className="avatar" />
                     <div className="chatroom__userdata">

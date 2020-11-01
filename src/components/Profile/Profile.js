@@ -73,6 +73,8 @@ function Profile({email, name, imageUrl, stateMessage, me, filterText}) {
                     userProfileName: [user.profileName, name],
                     userProfileUrl: [user.profileUrl, imageUrl],
                     userStateMessage: [user.stateMessage, stateMessage],
+                    lastTimestamp: null,
+                    lastMessage: ""
                 })
             }
         })

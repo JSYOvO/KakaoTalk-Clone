@@ -27,7 +27,7 @@ function Chats() {
         db.collection('chatRoom').orderBy('lastTimestamp','desc').onSnapshot(snapshot => {
             setChattingRooms([]);
             snapshot.docs.map(doc => {
-                if(doc.data().userList[0] === user.email || doc.data().userList[1] === user.email){
+                if((doc.data().userList[0] === user.email || doc.data().userList[1] === user.email)){
                     setChattingRooms(prevChattingRooms => [...prevChattingRooms, [doc.id, doc.data()]])
                     doc.data().userList[0] === user.email ? setPartnerIdx(1) : setPartnerIdx(0);
                 }
