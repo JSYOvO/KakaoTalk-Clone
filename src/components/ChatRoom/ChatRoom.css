@@ -25,3 +25,7 @@
     right: 0px;
     top: 1px;
 }
+
+.chatroom__datail_initialize {
+    display: none;
+}

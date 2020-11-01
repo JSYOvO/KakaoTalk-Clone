@@ -104,8 +104,6 @@ function Chats() {
                         chatWithProfileName= {chattingRoom[1].userProfileName[partnerIdx]}
                         chatWithProfileUrl= {chattingRoom[1].userProfileUrl[partnerIdx]}
                         chatWithStateMessage= {chattingRoom[1].userStateMessage[partnerIdx]}
-                        timestamp= {chattingRoom[1].lastTimestamp}
-                        message= {chattingRoom[1].lastMessage}
                         filterCondition= {filterCondition}
                     />
                 ))}
